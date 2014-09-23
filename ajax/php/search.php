@@ -22,9 +22,10 @@ else {
   <span>No results</span>
   <br/>
   <br/>
-  <button>Create new user</button>
+  <button id="cr_user">Create new user</button>
 <?php
 }
 ?>
 
 <script src="ajax/js/loaddata.js"></script>
+<script src="ajax/js/create_user.js"></script>

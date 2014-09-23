@@ -14,13 +14,10 @@ require_once 'core/init.php';
       <span id="title">Lock Utility</span>
 
       <div class="formbox">
-        <form method="POST" action="#">
-          <span>
-            <span>Last Name</span>
-            <input id="name_box" type="text" name="name"></input>
-          </span>
-          <span>
-        </form>
+        <span>
+          <span>Search </span>
+          <input id="name_box" type="text" name="name" placeholder=" Last Name.."></input>
+        </span>
       </div>
 
       <div id="contents" class="contents"></div>

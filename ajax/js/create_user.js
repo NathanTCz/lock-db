@@ -6,8 +6,10 @@
 
 
 $('#cr_user').click(function(){
+  var l = $('#name_box').val();
+
   $.ajax({
-    url: 'ajax/php/create_user.php',
+    url: 'ajax/php/create_user.php?lname='+l,
     success: function(data) {
       $('#contents').html(data);
     }

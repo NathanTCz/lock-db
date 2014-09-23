@@ -18,7 +18,9 @@ if (! empty($_POST) ) {
   $DATA->lock_roster[$new_user->last_name] = $new_user;
 
   // save new user/flush rosters
-  $DATA->flush_lock_roster();
+  $DATA->flush_lock_roster($new_user->type);
+
+  echo 'User: ' . $new_user->name . ' has been saved to the database';
 }
 else {
 ?>
@@ -29,7 +31,7 @@ else {
   </div>
   <div>
     <span>Last Name</span>
-    <input id="lname" type="text"></input>
+    <input id="lname" type="text" value="<?php echo $_GET['lname'];?>"></input>
   </div>
   <div>
     <span>Card #</span>

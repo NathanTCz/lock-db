@@ -14,7 +14,9 @@ class User {
 
     $this->cardnum = $cardnum;
     $this->pin = $pin;
-    $this->groups = $grps;
+
+    
+    $this->groups = str_replace("\n", '', $grps);
 
     $this->type = $type;
   }

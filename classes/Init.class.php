@@ -6,13 +6,14 @@ class Init {
   public $student_roster;
   public $studroster_filename;
   public $pin_files = array();
+  public $types = array();
 
   function __construct ($r, $pf) {
     $this->studroster_filename = $r;
     $this->pin_files = $pf; 
 
     //$this->parse_students();
-    $this->parse_pin_files();
+    //$this->parse_pin_files();
   }
 
   function parse_students () {
@@ -48,6 +49,15 @@ class Init {
     */
 
     foreach ($this->pin_files as $fname) {
+      // add to types
+      // strip off '.pins'
+      $type = explode( '.', $fname)[0];
+      // spit up path name by '/'
+      $type = explode( '/', $type );
+      // take last element;
+      $type = array_pop( $type );
+      $this->types[$fname] = $type;
+
       $handle = fopen($fname, "r");
 
       if ($handle) {
@@ -72,7 +82,7 @@ class Init {
       }
     }
 
-    //sort($this->roster);
+    uksort($this->lock_roster, 'strcasecmp');
   }
 
   function search_lock_roster ($search) {
@@ -89,6 +99,45 @@ class Init {
       return array_intersect_key( $array, array_flip( $result ) );
     }
     return array();
+  }
+
+  function search_student_roster ($search) {
+    $this->parse_pin_files();
+
+    if ( strlen($search) > 0 ) {
+      $search = $search . '*';
+
+      $array = $this->student_roster;
+
+      $search = str_replace( '\*', '.*?', preg_quote( $search, '/' ) );
+      $result = preg_grep( '/^' . $search . '$/i', array_keys( $array ) );
+
+      return array_intersect_key( $array, array_flip( $result ) );
+    }
+    return array();
+  }
+
+  function flush_lock_roster ($which) {
+    uksort($this->lock_roster, 'strcasecmp');
+
+    $file_format = array();
+
+    foreach ($this->lock_roster as $user) {
+      if ($user->type === $which) {
+        $line = $user->name . ':' . $user->cardnum . ':' . $user->pin . ':' . $user->groups;
+
+        $file_format[$user->type][] = $line . "\n";
+      }
+    }
+
+    foreach ($file_format as $fname => $list) {
+      $handle = fopen($fname, 'w');
+
+      foreach ($list as $line) {
+        fwrite($handle, $line);
+      }
+      fclose($handle);
+    }
   }
 
 }

@@ -47,8 +47,8 @@ div.formbox {
   margin: 1em;
 }
 
-div.formbox > form > span {
-  margin: 0 1em;
+div.formbox > span {
+  margin: 0 4em;
 }
 
 div.contents {
@@ -72,7 +72,25 @@ div.info_box > div > span {
   display: inline-block;
   min-width: 4em;
 
+  margin: 0.2em;
+
+  text-align: left;
+}
+
+div.create_u > div {
+  margin: 0.2em;
+}
+
+div.create_u > div > span {
+  display: inline-block;
+  min-width: 7em;
+
   margin: 0.5em;
 
   text-align: left;
+}
+
+div.create_u > div > textarea {
+  width: 24em;
+  height: 4em;
 }
