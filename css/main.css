@@ -1,0 +1,78 @@
+html {
+  display: block;
+  position: relative;
+  width: 100%;
+  height: 100%;
+
+  margin: 0;
+  padding: 0;
+
+  background: gainsboro;
+}
+
+body {
+  display: block;
+  width: 100%;
+  height: 90%;
+
+  margin: 0;
+  padding: 0;
+}
+
+div {
+  display: block;
+}
+
+div.wrapper {
+  width: 75%;
+  height: 100%;
+
+  margin: 2em auto;
+
+  background: white;
+}
+
+span#title {
+  display: block;
+
+  padding: 1em;
+
+  font-size: 3em;
+  text-align: left;
+}
+
+div.formbox {
+  float: left;
+
+  margin: 1em;
+}
+
+div.formbox > form > span {
+  margin: 0 1em;
+}
+
+div.contents {
+  clear: both;
+  width: 90%;
+  min-height: 50px;
+  max-height: 60%;
+  overflow-y: scroll;
+
+  /*margin: 1em 0 0 2em;*/
+  margin: 0 auto;
+
+  /*border: 1px solid gray;*/
+}
+
+div.contents > span {
+  margin: 0.2em;
+}
+
+div.info_box > div > span {
+  display: inline-block;
+  min-width: 4em;
+
+  margin: 0.5em;
+
+  text-align: left;
+}
