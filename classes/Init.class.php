@@ -27,8 +27,7 @@ class Init {
               $buffer[1],
               $buffer[2],
               $buffer[3],
-              $buffer[4],
-              $this->studroster_filename
+              $buffer[4]
             );
 
             $this->student_roster[$new_stud->last_name] = $new_stud;
@@ -102,7 +101,7 @@ class Init {
   }
 
   function search_student_roster ($search) {
-    $this->parse_pin_files();
+    $this->parse_students();
 
     if ( strlen($search) > 0 ) {
       $search = $search . '*';

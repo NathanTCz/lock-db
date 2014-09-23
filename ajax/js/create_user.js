@@ -6,10 +6,8 @@
 
 
 $('#cr_user').click(function(){
-  var l = $('#name_box').val();
-
   $.ajax({
-    url: 'ajax/php/create_user.php?lname='+l,
+    url: 'ajax/php/create_user.php',
     success: function(data) {
       $('#contents').html(data);
     }
@@ -30,6 +28,28 @@ $('#save').click(function(){
     url: 'ajax/php/create_user.php',
     type: 'POST',
     data: formData,
+    success: function(data) {
+      $('#contents').html(data);
+    }
+  });
+});
+
+$('#lname').keyup(function(){
+  var q = $(this).val();
+
+  $.ajax({
+    url: 'ajax/php/cross_ref.php?q='+q,
+    success: function(data) {
+      $('#search_list').html(data);
+    }
+  });
+});
+
+$('div.line_item').click(function(){
+  var i = $(this).attr('data-key');
+
+  $.ajax({
+    url: 'ajax/php/create_user.php?i='+i,
     success: function(data) {
       $('#contents').html(data);
     }

@@ -23,15 +23,25 @@ if (! empty($_POST) ) {
   echo 'User: ' . $new_user->name . ' has been saved to the database';
 }
 else {
+  if (! empty($_GET) ) {
+    $DATA->parse_students();
+    $user = $DATA->student_roster[ $_GET['i'] ];
+  }
+  else $user = null;
+
 ?>
 <div class="create_u">
   <div>
-    <span>First Name</span>
-    <input id="fname" type="text"></input>
+    <span>Last Name</span>
+    <input id="lname" type="text"
+      value="<?php if(isset($user)) echo $user->last_name;?>">
+    </input>
   </div>
   <div>
-    <span>Last Name</span>
-    <input id="lname" type="text" value="<?php echo $_GET['lname'];?>"></input>
+    <span>First Name</span>
+    <input id="fname" type="text"
+      value="<?php if(isset($user)) echo $user->fname;?>">
+    </input>
   </div>
   <div>
     <span>Card #</span>
@@ -46,9 +56,16 @@ else {
     <select id="type">
       <?php
       foreach ($DATA->types as $fname => $type) {
+        if ( isset($user) && $fname === $user->type) {
+      ?>
+      <option selected value="<?php echo $fname;?>"><?php echo $type;?></option>
+      <?php
+       }
+        else {
       ?>
       <option value="<?php echo $fname;?>"><?php echo $type;?></option>
       <?php
+        }
       }
       ?>
     </select>
@@ -61,6 +78,10 @@ else {
   <div>
     <button id="save">Save User</button>
   </div>
+</div>
+
+<div id="search_list" class="search_list">
+
 </div>
 <?php
 }

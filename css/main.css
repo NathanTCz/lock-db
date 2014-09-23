@@ -68,6 +68,11 @@ div.contents > span {
   margin: 0.2em;
 }
 
+div.line_item {
+  margin: 0.2em;
+  cursor: pointer;
+}
+
 div.info_box > div > span {
   display: inline-block;
   min-width: 4em;
@@ -75,6 +80,10 @@ div.info_box > div > span {
   margin: 0.2em;
 
   text-align: left;
+}
+
+div.create_u {
+  float: left;
 }
 
 div.create_u > div {
@@ -93,4 +102,13 @@ div.create_u > div > span {
 div.create_u > div > textarea {
   width: 24em;
   height: 4em;
+}
+
+div.search_list {
+  float: left;
+  height: 18em;
+
+  margin: 0 0 0 10em;
+
+  overflow-y: scroll;
 }
