@@ -3,7 +3,7 @@ Used to load individual user data
 */
 
 
-$('div.line_item').click(function(){
+$(document).on('click', 'div.line_item1', function(){
   var i = $(this).attr('data-key');
 
   $.ajax({

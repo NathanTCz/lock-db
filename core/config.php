@@ -7,7 +7,8 @@
  * system.
  */
 $authorized_users = array(
-  '128.186.120.147'
+  '128.186.120.147',
+  '128.186.120.76'
 );
 
 // Specify *.pins files here

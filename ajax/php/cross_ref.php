@@ -9,7 +9,7 @@ if ( !empty($results) ) {
 
   foreach ( $results as $key => $user ) {
 ?>
-  <div class="line_item" data-key="<?php echo $key;?>">
+  <div class="line_item2" data-key="<?php echo $key;?>">
     <span><?php echo $user->name;?></span>
   </div>
 <?php
@@ -21,5 +21,3 @@ else {
 <?php
 }
 ?>
-
-<script src="ajax/js/create_user.js"></script>

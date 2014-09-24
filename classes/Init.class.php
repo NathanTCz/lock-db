@@ -1,4 +1,5 @@
 <?php
+require_once "classes/User.class.php";
 require_once "classes/Student.class.php";
 
 class Init {
@@ -11,39 +12,39 @@ class Init {
   function __construct ($r, $pf) {
     $this->studroster_filename = $r;
     $this->pin_files = $pf; 
-
-    //$this->parse_students();
-    //$this->parse_pin_files();
   }
 
   function parse_students () {
     $handle = fopen($this->studroster_filename, "r");
 
     if ($handle) {
-        while (($buffer = fgets($handle, 1024)) !== false) {
-            $buffer = explode("|", $buffer);
-            $new_stud = new Student (
-              $buffer[0],
-              $buffer[1],
-              $buffer[2],
-              $buffer[3],
-              $buffer[4]
-            );
+      $index = 0;
 
-            $this->student_roster[$new_stud->last_name] = $new_stud;
-        }
-        if (!feof($handle)) {
-            echo "Error: unexpected fgets() fail\n";
-        }
-        fclose($handle);
+      while (($buffer = fgets($handle, 1024)) !== false) {
+          $buffer = explode("|", $buffer);
+          $new_stud = new Student (
+            $buffer[0],
+            $buffer[1],
+            $buffer[2],
+            $buffer[3],
+            $buffer[4]
+          );
+
+          $this->student_roster[$new_stud->last_name . $new_stud->first_name . $index++] = $new_stud;
+      }
+      if (!feof($handle)) {
+          echo "Error: unexpected fgets() fail\n";
+      }
+      fclose($handle);
     }
   }
 
   function parse_pin_files () {
     /*
      * Lines in these files *should* be formatted as such
-     * Last, First:5894 3710 0123 4567:0714:group1,groupN,
      *     NAME           CARD #       PIN       GROUPS
+     * Last, First:5894 3710 0123 4567:0714:group1, ... , groupN
+     *
      * values delmited by colons ':'
     */
 
@@ -60,24 +61,27 @@ class Init {
       $handle = fopen($fname, "r");
 
       if ($handle) {
-          while (($buffer = fgets($handle, 1024)) !== false) {
-            if ($buffer[0] === '#') continue;
+        $index = 0;
 
-            $buffer = explode(":", $buffer);
-            $new_user = new User (
-              $buffer[0],
-              $buffer[1],
-              $buffer[2],
-              $buffer[3],
-              $fname
-            );
+        while (($buffer = fgets($handle, 1024)) !== false) {
 
-            $this->lock_roster[$new_user->last_name] = $new_user;
-          }
-          if (!feof($handle)) {
-              echo "Error: unexpected fgets() fail\n";
-          }
-          fclose($handle);
+          if ($buffer[0] === '#') continue;
+
+          $buffer = explode(":", $buffer);
+          $new_user = new User (
+            $buffer[0],
+            $buffer[1],
+            $buffer[2],
+            $buffer[3],
+            $fname
+          );
+
+          $this->lock_roster[$new_user->last_name . $new_user->first_name . $index++] = $new_user;
+        }
+        if (!feof($handle)) {
+            echo "Error: unexpected fgets() fail\n";
+        }
+        fclose($handle);
       }
     }
 

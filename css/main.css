@@ -23,6 +23,31 @@ div {
   display: block;
 }
 
+div::-webkit-scrollbar {
+  width: 2px;
+}
+
+button {
+  margin: 0;
+  padding: 5px;
+
+  font-size: 0.99em;
+  font-weight: bold;
+  color: black;
+
+  cursor: pointer;
+  background: none;
+  border: none;
+/*  border-top: none;
+  border-right: 1px solid black;
+  border-bottom: none;
+  border-left: 1px solid black;*/
+}
+
+button:focus {
+  outline: none;
+}
+
 div.wrapper {
   width: 75%;
   height: 100%;
@@ -41,14 +66,18 @@ span#title {
   text-align: left;
 }
 
-div.formbox {
-  float: left;
-
-  margin: 1em;
+div.tools {
+  margin: 0 2em 4em 2em;
 }
 
-div.formbox > span {
-  margin: 0 4em;
+div.tools > button {
+  float: right;
+}
+
+div.tools div.formbox {
+  float: left;
+  margin: 0 0 0 2em;
+  padding: 5px;
 }
 
 div.contents {
@@ -68,7 +97,12 @@ div.contents > span {
   margin: 0.2em;
 }
 
-div.line_item {
+div.line_item1 {
+  margin: 0.2em;
+  cursor: pointer;
+}
+
+div.line_item2 {
   margin: 0.2em;
   cursor: pointer;
 }
@@ -80,6 +114,11 @@ div.info_box > div > span {
   margin: 0.2em;
 
   text-align: left;
+}
+
+div.info_box > span {
+  font-size: 0.7em;
+  color: gray;
 }
 
 div.create_u {
@@ -111,4 +150,8 @@ div.search_list {
   margin: 0 0 0 10em;
 
   overflow-y: scroll;
+}
+
+div.upload {
+  width: 50%;
 }
