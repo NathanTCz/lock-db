@@ -48,6 +48,11 @@ button:focus {
   outline: none;
 }
 
+textarea {
+  width: 24em;
+  height: 4em;
+}
+
 div.wrapper {
   width: 75%;
   height: 100%;
@@ -65,13 +70,20 @@ span#title {
   font-size: 3em;
   text-align: left;
 }
+span[id*="_errors"] {
+  display: block;
+
+  font-size: 0.9em;
+  color: red;
+}
 
 div.tools {
-  margin: 0 2em 4em 2em;
+  margin: 0 2em 5em 2em;
 }
 
 div.tools > button {
   float: right;
+  margin: 0 1em;
 }
 
 div.tools div.formbox {
@@ -138,9 +150,8 @@ div.create_u > div > span {
   text-align: left;
 }
 
-div.create_u > div > textarea {
-  width: 24em;
-  height: 4em;
+div.create_u > div > span#point_errors {
+  display: block;
 }
 
 div.search_list {
@@ -154,4 +165,8 @@ div.search_list {
 
 div.upload {
   width: 50%;
+}
+
+div.upload > form > div {
+  margin: 2em;
 }

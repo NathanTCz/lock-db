@@ -4,7 +4,7 @@ error_reporting(E_ALL);
 
 require_once 'core/config.php';
 
-if (! in_array($_SERVER['REMOTE_ADDR'], $authorized_users) ) {
+if (! in_array($_SERVER['REMOTE_ADDR'], $AUTH_USERS) ) {
   include 'includes/no_access.php';
   exit;
 }
@@ -13,7 +13,7 @@ require_once 'classes/Init.class.php';
 require_once 'classes/User.class.php';
 
 $DATA = new Init(
-  $stud_roster_file,
-  $pin_files
+  $STUD_RSTR_FILE,
+  $PIN_FILES
 );
 ?>

@@ -20,7 +20,7 @@ class User {
     $this->pin = $pin;
 
     
-    $this->groups = str_replace("\n", '', $grps);
+    $this->groups = $grps;
 
     $this->type = $type;
   }

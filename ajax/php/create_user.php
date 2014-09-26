@@ -10,7 +10,7 @@ if ( isset($_POST) && !empty($_POST) ) {
       $_POST['lname'] . ', ' . $_POST['fname'],
       $_POST['cardnum'],
       $_POST['pin'],
-      $_POST['points'],
+      trim( $_POST['points'] ),
       $_POST['type']
     );
 
@@ -26,14 +26,14 @@ if ( isset($_POST) && !empty($_POST) ) {
       $_POST['lname'] . ', ' . $_POST['fname'],
       $_POST['cardnum'],
       $_POST['pin'],
-      $_POST['points'],
+      trim( $_POST['points'] ),
       $_POST['type']
     );
 
     $DATA->lock_roster[ $_POST['index'] ] = $new_user;
 
-    // save new user/flush rosters
-    $DATA->flush_lock_roster($new_user->type);
+    // update all pin files just in case the user chaged type.
+    $DATA->flush_all_lock_roster($new_user->type);
 
     echo 'User: ' . $new_user->name . ' has been updated.';
   }
@@ -58,8 +58,9 @@ else {
     value="<?php if(isset($_GET)) echo $_GET['action'];?>">
   </input>
   <input id="index" type="hidden"
-    value="<?php if(isset($_GET)) echo $_GET['i'];?>">
+    value="<?php if(isset($_GET['i'])) echo $_GET['i'];?>">
   </input>
+  <input id="valid" type="hidden" value="1"></input>
   <div>
     <span>Last Name</span>
     <input id="lname" type="text"
@@ -77,12 +78,14 @@ else {
     <input id="cardnum" type="text"
       value="<?php if(isset($user)) echo $user->cardnum;?>">
     </input>
+    <span id="card_errors"></span>
   </div>
   <div>
     <span>PIN #</span>
     <input id="pin" type="text"
       value="<?php if(isset($user)) echo $user->pin;?>">
     </input>
+    <span id="pin_errors"></span>
   </div>
   <div>
     <span>Type</span>
@@ -106,7 +109,8 @@ else {
   <div>
     <span>Groups or Access Points</span>
     <br />
-    <textarea id="points" placeholder="groups and/or access points separated by a comma. no spaces"><?php if(isset($user)) echo $user->groups;?></textarea>
+    <textarea id="points" placeholder="groups and/or access points separated by a comma."><?php if(isset($user)) echo $user->groups;?></textarea>
+    <span id="point_errors"></span>
   </div>
   <div>
     <button id="save">Save User</button>

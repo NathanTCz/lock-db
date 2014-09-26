@@ -10,6 +10,7 @@ require_once 'core/init.php';
     <script src="ajax/js/general.js"></script>
     <script src="ajax/js/loaddata.js"></script>
     <script src="ajax/js/create_user.js"></script>
+    <script src="ajax/js/upload.js"></script>
   </head>
 
   <body>
@@ -24,6 +25,7 @@ require_once 'core/init.php';
           </span>
         </div>
 
+        <button id="cr_doors">Create Door Files</button>
         <button id="up_csv">Upload File</button>
       </div>
 

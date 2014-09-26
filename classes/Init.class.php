@@ -64,9 +64,9 @@ class Init {
         $index = 0;
 
         while (($buffer = fgets($handle, 1024)) !== false) {
-
           if ($buffer[0] === '#') continue;
 
+          $buffer = str_replace("\n", '', $buffer);
           $buffer = explode(":", $buffer);
           $new_user = new User (
             $buffer[0],
@@ -86,6 +86,44 @@ class Init {
     }
 
     uksort($this->lock_roster, 'strcasecmp');
+  }
+
+  function parse_csv ($fname, $type, $points, $action) {
+    /*
+     * Lines in these files *should* be formatted as such
+     * LASTNAME,FIRSTNAME,CARDNUMBER,PIN
+     *
+     * values delmited by colons ','
+    */
+    
+    // input sanitation
+    $points = preg_replace('/\s/', '', $points;
+
+    $handle = fopen($fname, "r");
+
+    if ($handle) {
+      $index = 0;
+
+      while (($buffer = fgets($handle, 1024)) !== false) {
+        $buffer = str_replace("\n", '', $buffer);
+        $buffer = explode(",", $buffer);
+        $new_user = new User (
+          $buffer[0] . ', ' . $buffer[1],
+          $buffer[2],
+          $buffer[3],
+          $points,
+          $type
+        );
+
+        $this->lock_roster[$new_user->last_name . $new_user->first_name . $index++] = $new_user;
+      }
+      if (!feof($handle)) {
+          echo "Error: unexpected fgets() fail\n";
+      }
+      fclose($handle);
+    }
+
+    $this->flush_all_lock_roster();
   }
 
   function search_lock_roster ($search) {
@@ -131,6 +169,27 @@ class Init {
 
         $file_format[$user->type][] = $line . "\n";
       }
+    }
+
+    foreach ($file_format as $fname => $list) {
+      $handle = fopen($fname, 'w');
+
+      foreach ($list as $line) {
+        fwrite($handle, $line);
+      }
+      fclose($handle);
+    }
+  }
+
+  function flush_all_lock_roster () {
+    uksort($this->lock_roster, 'strcasecmp');
+
+    $file_format = array();
+
+    foreach ($this->lock_roster as $user) {
+      $line = $user->name . ':' . $user->cardnum . ':' . $user->pin . ':' . $user->groups;
+
+      $file_format[$user->type][] = $line . "\n";
     }
 
     foreach ($file_format as $fname => $list) {

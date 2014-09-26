@@ -2,7 +2,8 @@
  * This is the main engine for all static elements.
  * This is where all of the handlers are added to elements
  * that are not loaded dynamically with AJAX, but rather
- * always part of the page. eg. the search bar.
+ * always part of the page. eg. the search bar. This script
+ * also serves generic objects such as access point entry.
 */
 
 
@@ -24,6 +25,22 @@ $(document).on('click', '#up_csv', function(){
     url: 'ajax/php/upload.php',
     success: function(data) {
       $('#contents').html(data);
+    }
+  });
+});
+
+/* Validate group/access point entry */
+$(document).on('keyup', '#points', function(){
+  var sendData = {
+    q: $(this).val(),
+  };
+
+  $.ajax({
+    url: 'ajax/php/check_points.php',
+    type: 'POST',
+    data: sendData,
+    success: function(data) {
+      $('#point_errors').html(data);
     }
   });
 });
