@@ -55,7 +55,7 @@ else {
 ?>
 <div class="create_u">
   <input id="action" type="hidden"
-    value="<?php if(isset($_GET)) echo $_GET['action'];?>">
+    value="<?php if(isset($_GET['action'])) echo $_GET['action'];?>">
   </input>
   <input id="index" type="hidden"
     value="<?php if(isset($_GET['i'])) echo $_GET['i'];?>">

@@ -17,7 +17,8 @@ $PIN_FILES = array(
   'lock-db/flatdb/staff.pins',
   'lock-db/flatdb/student.pins',
   'lock-db/flatdb/guest.pins',
-  'lock-db/flatdb/university.pins'
+  'lock-db/flatdb/university.pins',
+  'lock-db/flatdb/test.pins'
 );
 
 // Specify the student roster file here.

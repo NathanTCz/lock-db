@@ -18,7 +18,7 @@ class Init {
     $handle = fopen($this->studroster_filename, "r");
 
     if ($handle) {
-      $index = 0;
+      $cnt = 0;
 
       while (($buffer = fgets($handle, 1024)) !== false) {
           $buffer = explode("|", $buffer);
@@ -30,7 +30,8 @@ class Init {
             $buffer[4]
           );
 
-          $this->student_roster[$new_stud->last_name . $new_stud->first_name . $index++] = $new_stud;
+          $index = preg_replace('/\s/', '', $new_stud->last_name . $new_stud->first_name . $cnt++);
+          $this->student_roster[$index] = $new_stud;
       }
       if (!feof($handle)) {
           echo "Error: unexpected fgets() fail\n";
@@ -61,7 +62,6 @@ class Init {
       $handle = fopen($fname, "r");
 
       if ($handle) {
-        $index = 0;
 
         while (($buffer = fgets($handle, 1024)) !== false) {
           if ($buffer[0] === '#') continue;
@@ -76,7 +76,8 @@ class Init {
             $fname
           );
 
-          $this->lock_roster[$new_user->last_name . $new_user->first_name . $index++] = $new_user;
+          $index = preg_replace('/\s/', '', $new_user->last_name . $new_user->first_name . $new_user->cardnum);
+          $this->lock_roster[$index] = $new_user;
         }
         if (!feof($handle)) {
             echo "Error: unexpected fgets() fail\n";
@@ -97,12 +98,12 @@ class Init {
     */
     
     // input sanitation
-    $points = preg_replace('/\s/', '', $points;
+    $points = preg_replace('/\s/', '', $points);
 
     $handle = fopen($fname, "r");
 
     if ($handle) {
-      $index = 0;
+      $conflicts = array();
 
       while (($buffer = fgets($handle, 1024)) !== false) {
         $buffer = str_replace("\n", '', $buffer);
@@ -115,7 +116,59 @@ class Init {
           $type
         );
 
-        $this->lock_roster[$new_user->last_name . $new_user->first_name . $index++] = $new_user;
+        // search for duplicates
+        $index = preg_replace('/\s/', '', $new_user->last_name . $new_user->first_name . $new_user->cardnum);
+
+        $results = $this->search_lock_roster($index);
+
+        if ( count($results) > 1 ) {
+          $conflicts['dup'][] = $new_user;
+          continue;
+        }
+        elseif ( count($results) == 1 ) {
+          $key = key($results);
+
+          $old_groups = explode(',', $this->lock_roster[$key]->groups);
+
+          if ($action === 'add') {
+            $new_groups = explode(',', $points);
+            $new_groups = array_unique( array_merge($new_groups, $old_groups) );
+            $new_groups = implode(',', $new_groups);
+            $this->lock_roster[$key]->groups = $new_groups;
+          }
+
+          elseif ($action === 'remove') {
+            $new_groups = explode(',', $points);
+            foreach ($new_groups as $key_new => $new) {
+              if ( in_array($new, $old_groups) ) {
+                unset( $old_groups[$key_new] );
+              }
+            }
+            $new_groups = implode(',', $old_groups);
+            $this->lock_roster[$key]->groups = $new_groups;
+          }
+        }
+        elseif ( count($results) == 0 ) {
+          if ($action === 'add') {
+            if ( $type === 'lock-db/flatdb/student.pins' ) {
+              $students = $this->search_student_roster($new_user->last_name . $new_user->first_name);
+
+              if ( empty($students) )
+                $conflicts['new'][] = $new_user;
+              else {
+                $index = preg_replace('/\s/', '', $new_user->last_name . $new_user->first_name . $new_user->cardnum);
+                $this->lock_roster[$index] = $new_user;
+              }
+            }
+            else {
+echo $type;
+              $index = preg_replace('/\s/', '', $new_user->last_name . $new_user->first_name . $new_user->cardnum);
+              $this->lock_roster[$index] = $new_user;
+            }
+          }
+          elseif ($action === 'remove')
+            $conflicts['dne'][] = $new_user;
+        }
       }
       if (!feof($handle)) {
           echo "Error: unexpected fgets() fail\n";
@@ -124,11 +177,11 @@ class Init {
     }
 
     $this->flush_all_lock_roster();
+
+    return $conflicts;
   }
 
   function search_lock_roster ($search) {
-    $this->parse_pin_files();
-
     if ( strlen($search) > 0 ) {
       $search = $search . '*';
 
@@ -138,6 +191,42 @@ class Init {
       $result = preg_grep( '/^' . $search . '$/i', array_keys( $array ) );
 
       return array_intersect_key( $array, array_flip( $result ) );
+    }
+    return array();
+  }
+
+  function fuzzy_search_lockdb ($search) {
+    if ( strlen($search) > 0 ) {
+
+      $shortest = -1;
+  
+      foreach( $this->lock_roster as $key => $user ) {
+        
+        // calculate the distance between the input word,
+        // and the current word
+        $lev = levenshtein( strtolower($search), strtolower($user->last_name) );
+
+        // check for an exact match
+        if ($lev == 0) {
+
+            // closest word is this one (exact match)
+            $closest = array( $key => $user );
+            $shortest = 0;
+
+            // break out of the loop; we've found an exact match
+            break;
+        }
+
+        // if this distance is less than the next found shortest
+        // distance, OR if a next shortest word has not yet been found
+        if ($lev <= $shortest || $shortest < 0) {
+            // set the closest match, and shortest distance
+            $closest[$key] = $user;
+            $shortest = $lev;
+        }
+      }
+      // just return top 3. other seems to be too ambiguous
+      return array_reverse( array_slice($closest, -5, 5, true) );
     }
     return array();
   }
@@ -154,6 +243,43 @@ class Init {
       $result = preg_grep( '/^' . $search . '$/i', array_keys( $array ) );
 
       return array_intersect_key( $array, array_flip( $result ) );
+    }
+    return array();
+  }
+
+  function fuzzy_search_students ($search) {
+    $this->parse_students();
+    if ( strlen($search) > 0 ) {
+
+      $shortest = -1;
+  
+      foreach( $this->student_roster as $key => $user ) {
+        
+        // calculate the distance between the input word,
+        // and the current word
+        $lev = levenshtein( strtolower($search), strtolower($user->last_name) );
+
+        // check for an exact match
+        if ($lev == 0) {
+
+            // closest word is this one (exact match)
+            $closest = array( $key => $user );
+            $shortest = 0;
+
+            // break out of the loop; we've found an exact match
+            break;
+        }
+
+        // if this distance is less than the next found shortest
+        // distance, OR if a next shortest word has not yet been found
+        if ($lev <= $shortest || $shortest < 0) {
+            // set the closest match, and shortest distance
+            $closest[$key] = $user;
+            $shortest = $lev;
+        }
+      }
+      // just return top 3. other seems to be too ambiguous
+      return array_reverse( array_slice($closest, -5, 5, true) );
     }
     return array();
   }

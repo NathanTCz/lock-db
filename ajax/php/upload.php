@@ -4,9 +4,30 @@ require_once 'core/init.php';
 $DATA->parse_pin_files();
 
 if ( isset($_FILES) && !empty($_FILES) ) {
-  //$DATA->parse_csv( $_FILES['lfile']['tmp_name'], $_POST['type'], $_POST['points'], $_POST['action'] );
+  $conflicts = $DATA->parse_csv( $_FILES['lfile']['tmp_name'], $_POST['type'], $_POST['points'], $_POST['action'] );
+
+  if ( !empty($conflicts) ) {
+    foreach ( $conflicts['new'] as $new_stud ) {
+?>
+    <span><?php echo $new_stud->name?> is not on the roster.</span>
+    <span>Did you mean?</span>
+    <br/>
+    <br/>
+<?php
+    $results = $DATA->fuzzy_search_students($new_stud->last_name);
+    foreach ( $results as $key => $user ) {
+?>
+      <div class="line_item1" data-key="<?php echo $key;?>">
+        <span><?php echo $user->name;?></span>
+        <span><?php echo $user->cardnum;?></span>
+        <span><?php echo $user->groups;?></span>
+      </div>
+<?php
+    }
+    }
+  }
 }
-else;
+else {
 ?>
 <div class="upload">
   <p>
@@ -51,3 +72,6 @@ else;
     <button id="upload">Upload</button>
   </div>
 </div>
+<?php
+}
+?>
