@@ -41,7 +41,12 @@ $(document).on('click', '#cr_doors', function(){
 
 /* Logout button */
 $(document).on('click', '#logout', function(){
-  window.location = 'login.php?logout=yes';
+  $.ajax({
+    url: 'includes/login.php?logout=yes',
+    success: function(data) {
+      $('html').html(data);
+    }
+  });
 });
 
 /* Validate group/access point entry */

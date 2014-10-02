@@ -150,7 +150,7 @@ class Init {
         }
         elseif ( count($results) == 0 ) {
           if ($action === 'add') {
-            if ( $type === '/srv/http/lock-db/flatdb/student.pins' ) {
+            if ( $type === $PIN_FILE_PATH . 'student.pins' ) {
               $students = $this->search_student_roster($new_user->last_name . $new_user->first_name);
 
               if ( empty($students) )

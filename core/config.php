@@ -13,18 +13,19 @@ $AUTH_USERS = array(
 
 $AUTH_GROUP = 'CS-System';
 
+$PIN_FILE_PATH = '/srv/http/lock-db/flatdb/';
+
 // Specify *.pins files here
 $PIN_FILES = array(
-  '/srv/http/lock-db/flatdb/faculty.pins',
-  '/srv/http/lock-db/flatdb/staff.pins',
-  '/srv/http/lock-db/flatdb/student.pins',
-  '/srv/http/lock-db/flatdb/guest.pins',
-  '/srv/http/lock-db/flatdb/university.pins',
-  '/srv/http/lock-db/flatdb/test.pins'
+  $PIN_FILE_PATH . 'faculty.pins',
+  $PIN_FILE_PATH . 'staff.pins',
+  $PIN_FILE_PATH . 'student.pins',
+  $PIN_FILE_PATH . 'guest.pins',
+  $PIN_FILE_PATH . 'university.pins'
 );
 
 // Specify the student roster file here.
-$STUD_RSTR_FILE = 'lock-db/flatdb/roster.txt';
+$STUD_RSTR_FILE = $PIN_FILE_PATH . 'roster.txt';
 
 
 /* List of default groups. These groups represent the access

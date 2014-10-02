@@ -1,4 +1,5 @@
 <?php
+chdir('../');
 require_once 'core/config.php';
 session_start();
 
@@ -63,7 +64,6 @@ if ($_POST["oldform"]) { //prevent null bind
 
 ?>
 
-<html>
 <head>
 <style>
 body {
@@ -99,6 +99,3 @@ Password: <input type='password' name='password'><br>
 </div>
 
 </body>
-
-</html>
-

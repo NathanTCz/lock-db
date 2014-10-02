@@ -26,9 +26,9 @@ require_once 'core/init.php';
           </span>
         </div>
 
+        <button id="logout">Logout</button>
         <button id="cr_doors">Create Lock Files</button>
         <button id="up_csv">Import File</button>
-        <button id="logout">Logout</button>
       </div>
 
 

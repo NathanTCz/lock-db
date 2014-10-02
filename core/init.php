@@ -1,7 +1,7 @@
 <?php
-ini_set('display_errors',1);
+/*ini_set('display_errors',1);
 error_reporting(E_ALL);
-
+*/
 session_start();
 
 require_once 'core/config.php';
@@ -11,13 +11,14 @@ if ( in_array($_SERVER['REMOTE_ADDR'], $AUTH_USERS) ) {
     ;
   }
   else {
-    header('Location: login.php');
+    include 'includes/login.php';
+    //header('Location: login.php');
     exit;
   }
 }
 else {
-  //include 'includes/no_access.php';
-  header('Location: login.php');
+  include 'includes/login.php';
+  //header('Location: login.php');
   exit;
 }
 
