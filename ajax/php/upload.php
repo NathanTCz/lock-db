@@ -2,29 +2,37 @@
 chdir('../../');
 require_once 'core/init.php';
 $DATA->parse_pin_files();
+$DATA->parse_students();
 
 if ( isset($_FILES) && !empty($_FILES) ) {
   $conflicts = $DATA->parse_csv( $_FILES['lfile']['tmp_name'], $_POST['type'], $_POST['points'], $_POST['action'] );
 
   if ( !empty($conflicts) ) {
+?>
+    <span><?php echo count($conflicts['new']);?> issues need to be resolved.</span>
+    <br/><br/>
+<?php
     foreach ( $conflicts['new'] as $new_stud ) {
 ?>
-    <span><?php echo $new_stud->name?> is not on the roster.</span>
-    <span>Did you mean?</span>
-    <br/>
-    <br/>
-<?php
-    $results = $DATA->fuzzy_search_students($new_stud->last_name);
-    foreach ( $results as $key => $user ) {
-?>
-      <div class="line_item1" data-key="<?php echo $key;?>">
-        <span><?php echo $user->name;?></span>
-        <span><?php echo $user->cardnum;?></span>
-        <span><?php echo $user->groups;?></span>
-      </div>
-<?php
+      <span><b><?php echo $new_stud->name?></b> is not on the student roster.</span>
+      <span>Did you mean?</span>
+      <br/>
+  <?php
+      $results = $DATA->fuzzy_search_students($new_stud->last_name);
+      foreach ( $results as $key => $user ) {
+  ?>
+        <div class="line_item3" data-orig="<?php echo $new_stud->name;?>" data-key="<?php echo $key;?>">
+          <span><?php echo $user->name;?></span>
+          <span><?php echo $user->cardnum;?></span>
+          <span><?php echo $user->groups;?></span>
+        </div>
+  <?php
+      }
+      echo '<br/><br/>';
     }
-    }
+  }
+  else {
+    echo 'File import complete';
   }
 }
 else {

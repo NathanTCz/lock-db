@@ -170,3 +170,7 @@ div.upload {
 div.upload > form > div {
   margin: 2em;
 }
+
+div.choose_pin_files {
+  margin: 2em;
+}

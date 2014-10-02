@@ -11,14 +11,16 @@ $AUTH_USERS = array(
   '128.186.120.76'
 );
 
+$AUTH_GROUP = 'CS-System';
+
 // Specify *.pins files here
 $PIN_FILES = array(
-  'lock-db/flatdb/faculty.pins',
-  'lock-db/flatdb/staff.pins',
-  'lock-db/flatdb/student.pins',
-  'lock-db/flatdb/guest.pins',
-  'lock-db/flatdb/university.pins',
-  'lock-db/flatdb/test.pins'
+  '/srv/http/lock-db/flatdb/faculty.pins',
+  '/srv/http/lock-db/flatdb/staff.pins',
+  '/srv/http/lock-db/flatdb/student.pins',
+  '/srv/http/lock-db/flatdb/guest.pins',
+  '/srv/http/lock-db/flatdb/university.pins',
+  '/srv/http/lock-db/flatdb/test.pins'
 );
 
 // Specify the student roster file here.

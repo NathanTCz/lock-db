@@ -29,6 +29,21 @@ $(document).on('click', '#up_csv', function(){
   });
 });
 
+/* Create Lock Files Button */
+$(document).on('click', '#cr_doors', function(){
+  $.ajax({
+    url: 'ajax/php/create_doors.php',
+    success: function(data) {
+      $('#contents').html(data);
+    }
+  });
+});
+
+/* Logout button */
+$(document).on('click', '#logout', function(){
+  window.location = 'login.php?logout=yes';
+});
+
 /* Validate group/access point entry */
 $(document).on('keyup', '#points', function(){
   var sendData = {
