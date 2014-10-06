@@ -92,6 +92,7 @@ else {
     <select id="type">
       <?php
       foreach ($DATA->types as $fname => $type) {
+echo $fname . '=' . $user->type . '<br>';
         if ( isset($user) && $fname === $user->type) {
       ?>
       <option selected value="<?php echo $fname;?>"><?php echo $type;?></option>

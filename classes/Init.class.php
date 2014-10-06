@@ -21,7 +21,7 @@ class Init {
     if ($handle) {
       $cnt = 0;
 
-      while (($buffer = fgets($handle, 1024)) !== false) {
+      while ( ($buffer = fgets($handle, 1024)) !== false ) {
           $buffer = explode("|", $buffer);
           $new_stud = new Student (
             $buffer[0],
@@ -64,7 +64,7 @@ class Init {
 
       if ($handle) {
 
-        while (($buffer = fgets($handle, 1024)) !== false) {
+        while ( ($buffer = fgets($handle, 1024)) !== false ) {
           if ($buffer[0] === '#') continue;
 
           $buffer = str_replace("\n", '', $buffer);
@@ -108,7 +108,7 @@ class Init {
     if ($handle) {
       $conflicts = array();
 
-      while (($buffer = fgets($handle, 1024)) !== false) {
+      while ( ($buffer = fgets($handle, 1024)) !== false ) {
         $buffer = str_replace("\n", '', $buffer);
         $buffer = explode(",", $buffer);
         $new_user = new User (

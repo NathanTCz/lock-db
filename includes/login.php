@@ -34,7 +34,7 @@ $username = strtoupper($_POST["username"]); //remove case sensitivity on the use
 $password = $_POST["password"];
 $formage = $_POST["formage"];
 
-if ($_POST["oldform"]) { //prevent null bind
+if ($_POST["oldform"]) { //prevent LDAP null bind
 
 	if ($username != NULL && $password != NULL){
 		//include the class and create a connection
