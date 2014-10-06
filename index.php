@@ -34,6 +34,9 @@ require_once 'core/init.php';
 
 
       <div id="contents" class="contents"></div>
+      <div class="version">
+        <?php echo 'rev.' . $CURR_VERSION;?>
+      </div>
     </div>
   </body>
 </html>

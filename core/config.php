@@ -1,6 +1,9 @@
 <?php
 // MAIN CONFIGURATION FILE
 
+// Current Version Number
+$CURR_VERSION = '1.0.1';
+
 
 /* List of IP addresses that are authorized to
  * use this software. This is instead of a login
