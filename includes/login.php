@@ -52,8 +52,9 @@ if ($_POST["oldform"]) { //prevent LDAP null bind
 			//establish your session and redirect
 			session_start();
 			$_SESSION["username"] = $username;
-            $_SESSION["userinfo"] = $adldap->user()->info($username);
-            $_SESSION["user_groups"] = $adldap->user()->groups($username);
+      $_SESSION["user_info"] = $adldap->user()->info($username);
+      $_SESSION["user_groups"] = $adldap->user()->groups($username);
+
 			$redir = "Location: /";
 			header($redir);
 			exit;
