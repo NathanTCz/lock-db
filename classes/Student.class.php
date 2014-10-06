@@ -7,7 +7,7 @@ class Student extends User {
   public $major;
   public $classes;
 
-  function __construct ($name, $eid, $year, $maj, $cls, $type = 'lock-db/flatdb/student.pins') {
+  function __construct ($name, $eid, $year, $maj, $cls, $type = '/srv/http/lock-db/flatdb/student.pins') {
     $name = preg_replace( '/:(0|1)/', '', $name);
     $name = strtolower($name);
 
