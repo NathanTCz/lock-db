@@ -1,6 +1,7 @@
 <?php
-require_once "classes/User.class.php";
-require_once "classes/Student.class.php";
+require_once 'core/config.php';
+require_once 'classes/User.class.php';
+require_once 'classes/Student.class.php';
 
 class Init {
   public $lock_roster;
@@ -97,6 +98,8 @@ class Init {
      * values delmited by colons ','
     */
     
+    global $PIN_FILE_PATH;
+
     // input sanitation
     $points = preg_replace('/\s/', '', $points);
 

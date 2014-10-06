@@ -73,7 +73,7 @@ body {
 }
 div {
   display: block;
-  width: 20%;
+  width: 30%;
   margin: 10em auto;
 }
 </style>
