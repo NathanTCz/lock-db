@@ -16,3 +16,5 @@ $user = $DATA->lock_roster[ $_GET['i'] ];
 </div>
 <br />
 <button id="ed_user" data-key="<?php echo $_GET['i'];?>">Edit User</button>
+<button id="del_user" data-key="<?php echo $_GET['i'];?>">Delete User</button>
+<input id="valid_del" type="hidden" value="0"></input> 

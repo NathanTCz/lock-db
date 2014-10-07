@@ -1,4 +1,5 @@
 <?php
+require_once 'core/config.php';
 require_once 'classes/User.class.php';
 
 class Student extends User {
@@ -7,7 +8,9 @@ class Student extends User {
   public $major;
   public $classes;
 
-  function __construct ($name, $eid, $year, $maj, $cls, $type = '/srv/http/lock-db/flatdb/student.pins') {
+  function __construct ($name, $eid, $year, $maj, $cls) {
+    global $PIN_FILE_PATH;
+
     $name = preg_replace( '/:(0|1)/', '', $name);
     $name = strtolower($name);
 
@@ -23,7 +26,7 @@ class Student extends User {
     $this->year = $year;
     $this->major = $maj;
     $this->classes = $cls;
-    $this->type = $type;
+    $this->type = $PIN_FILE_PATH . 'student.pins';
   }
 }
 ?>

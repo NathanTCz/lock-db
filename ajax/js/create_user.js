@@ -46,6 +46,30 @@ $(document).on('click', '#save', function(){
   else alert('please resolve form issues');
 });
 
+$(document).on('click', '#del_user', function(){
+  $(this).confirm({
+    text: "Are you sure you want to delete this user?",
+    confirm: function(button) {
+      var sendData = {
+        index: $('#del_user').attr('data-key'),
+        action: 'd'
+      };
+
+      $.ajax({
+        url: 'ajax/php/create_user.php',
+        type: 'POST',
+        data: sendData,
+        success: function(data) {
+          $('#contents').html(data);
+        }
+      });
+    },
+    cancel: function(button) {
+      // do nothing.
+    }
+  });
+});
+
 $(document).on('click', '#ed_user', function(){
   var sendData = {
     i: $(this).attr('data-key'),

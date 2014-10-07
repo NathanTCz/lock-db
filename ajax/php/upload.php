@@ -5,7 +5,7 @@ $DATA->parse_pin_files();
 $DATA->parse_students();
 
 if ( isset($_FILES) && !empty($_FILES) ) {
-  $conflicts = $DATA->parse_csv( $_FILES['lfile']['tmp_name'], $_POST['type'], $_POST['points'], $_POST['action'] );
+  $conflicts = $DATA->parse_csv( $_FILES['lfile'], $_POST['type'], $_POST['points'], $_POST['action'] );
 
   if ( !empty($conflicts) ) {
 ?>

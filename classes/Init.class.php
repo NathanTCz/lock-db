@@ -21,7 +21,7 @@ class Init {
     if ($handle) {
       $cnt = 0;
 
-      while (($buffer = fgets($handle, 1024)) !== false) {
+      while ( ($buffer = fgets($handle, 1024)) !== false ) {
           $buffer = explode("|", $buffer);
           $new_stud = new Student (
             $buffer[0],
@@ -64,7 +64,7 @@ class Init {
 
       if ($handle) {
 
-        while (($buffer = fgets($handle, 1024)) !== false) {
+        while ( ($buffer = fgets($handle, 1024)) !== false ) {
           if ($buffer[0] === '#') continue;
 
           $buffer = str_replace("\n", '', $buffer);
@@ -90,25 +90,26 @@ class Init {
     uksort($this->lock_roster, 'strcasecmp');
   }
 
-  function parse_csv ($fname, $type, $points, $action) {
+  function parse_csv ($file, $type, $points, $action) {
     /*
      * Lines in these files *should* be formatted as such
      * LASTNAME,FIRSTNAME,CARDNUMBER,PIN
      *
-     * values delmited by colons ','
+     * values delmited by commas ','
     */
     
     global $PIN_FILE_PATH;
+    global $OPERATOR;
 
     // input sanitation
     $points = preg_replace('/\s/', '', $points);
 
-    $handle = fopen($fname, "r");
+    $handle = fopen($file['tmp_name'], "r");
 
     if ($handle) {
       $conflicts = array();
 
-      while (($buffer = fgets($handle, 1024)) !== false) {
+      while ( ($buffer = fgets($handle, 1024)) !== false ) {
         $buffer = str_replace("\n", '', $buffer);
         $buffer = explode(",", $buffer);
         $new_user = new User (
@@ -179,6 +180,11 @@ class Init {
     }
 
     $this->flush_all_lock_roster();
+
+    // Log Operator action
+    $fname = $file['name'];
+    $description = "Import [$fname]: [$action points] $points -- " . count($conflicts['new']) . " issues";
+    $OPERATOR->log('IMPORT', $description);
 
     return $conflicts;
   }
