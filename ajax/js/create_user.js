@@ -46,8 +46,8 @@ $(document).on('click', '#save', function(){
   else alert('please resolve form issues');
 });
 
-$(document).on('click', '#del_user', function(){
-  $(this).confirm({
+$('.confirm').confirm({
+
     text: "Are you sure you want to delete this user?",
     confirm: function(button) {
       var sendData = {
@@ -67,7 +67,7 @@ $(document).on('click', '#del_user', function(){
     cancel: function(button) {
       // do nothing.
     }
-  });
+
 });
 
 $(document).on('click', '#ed_user', function(){
