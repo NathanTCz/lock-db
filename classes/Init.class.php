@@ -90,20 +90,21 @@ class Init {
     uksort($this->lock_roster, 'strcasecmp');
   }
 
-  function parse_csv ($fname, $type, $points, $action) {
+  function parse_csv ($file, $type, $points, $action) {
     /*
      * Lines in these files *should* be formatted as such
      * LASTNAME,FIRSTNAME,CARDNUMBER,PIN
      *
-     * values delmited by colons ','
+     * values delmited by commas ','
     */
     
     global $PIN_FILE_PATH;
+    global $OPERATOR;
 
     // input sanitation
     $points = preg_replace('/\s/', '', $points);
 
-    $handle = fopen($fname, "r");
+    $handle = fopen($file['tmp_name'], "r");
 
     if ($handle) {
       $conflicts = array();
@@ -179,6 +180,11 @@ class Init {
     }
 
     $this->flush_all_lock_roster();
+
+    // Log Operator action
+    $fname = $file['name'];
+    $description = "Import [$fname]: [$action points] $points -- " . count($conflicts['new']) . " issues";
+    $OPERATOR->log('IMPORT', $description);
 
     return $conflicts;
   }

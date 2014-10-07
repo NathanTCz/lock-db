@@ -6,7 +6,11 @@ require_once 'core/init.php';
 <html>
   <head>
     <link rel="stylesheet" type="text/css" href="css/main.css">
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/modal.css">
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.confirm.min.js"></script>
     <script src="ajax/js/general.js"></script>
     <script src="ajax/js/loaddata.js"></script>
     <script src="ajax/js/create_user.js"></script>

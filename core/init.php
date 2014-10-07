@@ -32,6 +32,7 @@ $DATA = new Init(
 $OPERATOR = new Operator (
   $_SESSION['username'],
   $_SESSION['user_info'],
-  $_SESSION['user_groups']
+  $_SESSION['user_groups'],
+  $_SERVER['REMOTE_ADDR']
 );
 ?>
