@@ -19,30 +19,30 @@ $user = $DATA->lock_roster[ $_GET['i'] ];
 <button class="confirm" id="del_user" data-key="<?php echo $_GET['i'];?>">Delete User</button>
 
 <script>
-/* Initialise the .confirm() plugin
+/* Initialise the .confirm() plugin:
  * Due to the nature of this element in HTML, This
  * snippet must be run on every load. Therefore it should
  * be placed here insted of loaddata.js
 */
 $('.confirm').confirm({
-    text: "Are you sure you want to delete this user?",
-    confirm: function(button) {
-      var sendData = {
-        index: button.attr('data-key'),
-        action: 'd'
-      };
+  text: "Are you sure you want to delete this user?",
+  confirm: function(button) {
+    var sendData = {
+      index: button.attr('data-key'),
+      action: 'd'
+    };
 
-      $.ajax({
-        url: 'ajax/php/create_user.php',
-        type: 'POST',
-        data: sendData,
-        success: function(data) {
-          $('#contents').html(data);
-        }
-      });
-    },
-    cancel: function(button) {
-      // do nothing.
-    }
+    $.ajax({
+      url: 'ajax/php/create_user.php',
+      type: 'POST',
+      data: sendData,
+      success: function(data) {
+        $('#contents').html(data);
+      }
+    });
+  },
+  cancel: function(button) {
+    // do nothing.
+  }
 });
 </script>
