@@ -26,7 +26,7 @@ require_once 'core/init.php';
         <div class="formbox">
           <span>
             <span>Search </span>
-            <input id="name_box" type="text" name="name" placeholder=" Last Name.."></input>
+            <input id="name_box" type="text" name="name" autocomplete="off" placeholder=" Last Name.."></input>
           </span>
         </div>
 
