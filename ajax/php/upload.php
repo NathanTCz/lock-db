@@ -31,12 +31,12 @@ if ( isset($_FILES) && !empty($_FILES) ) {
       }
       echo '<br/><br/>';
     }
-    $content_len = ob_get_length();
-    header('Content-Length: '. $content_len);
   }
   else {
     echo 'File import complete';
   }
+  $content_len = ob_get_length();
+  header('Content-Length: '. $content_len);
 }
 else {
 ?>
