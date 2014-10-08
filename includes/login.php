@@ -24,12 +24,6 @@ if ($logout == "yes") { //destroy the session
 	session_destroy();
 }
 
-//force the browser to use ssl (STRONGLY RECOMMENDED!!!!!!!!)
-/*if ($_SERVER["SERVER_PORT"] != 443){ 
-    header("Location: https://" . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF']); 
-    exit(); 
-}*/
-
 $username = strtoupper($_POST["username"]); //remove case sensitivity on the username
 $password = $_POST["password"];
 $formage = $_POST["formage"];
