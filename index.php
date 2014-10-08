@@ -19,6 +19,8 @@ require_once 'core/init.php';
   </head>
 
   <body>
+    <div id="p_bar"></div>
+
     <div class="wrapper">
       <span id="title">Lock Utility</span>
 

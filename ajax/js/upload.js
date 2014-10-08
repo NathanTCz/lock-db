@@ -15,8 +15,23 @@ $(document).on('click', '#upload', function(){
     cache: false,
     processData: false,
     contentType: false,
+    xhrFields: {
+      onprogress: function(e) {
+        if (e.lengthComputable) {
+          $('#p_bar').attr('style', 'width:0;height:2px;');
+
+          var percent = (e.loaded / e.total) * 100;
+          $('#p_bar').attr('style', 'width:'+percent+'%');
+        }
+        else {
+          $('#p_bar').attr('style', 'width:0;height:2px;');
+          $('#p_bar').attr('style', 'width:100%');
+        }
+      }
+    },
     success: function(data) {
       $('#contents').html(data);
+      $('#p_bar').attr('style', 'width:0;height:0;');
     }
   });
 });
