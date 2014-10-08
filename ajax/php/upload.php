@@ -5,6 +5,7 @@ $DATA->parse_pin_files();
 $DATA->parse_students();
 
 if ( isset($_FILES) && !empty($_FILES) ) {
+  ob_start();
   $conflicts = $DATA->parse_csv( $_FILES['lfile'], $_POST['type'], $_POST['points'], $_POST['action'] );
 
   if ( !empty($conflicts) ) {
@@ -30,6 +31,8 @@ if ( isset($_FILES) && !empty($_FILES) ) {
       }
       echo '<br/><br/>';
     }
+    $content_len = ob_get_length();
+    header('Content-Length: '. $content_len);
   }
   else {
     echo 'File import complete';

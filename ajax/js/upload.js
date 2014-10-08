@@ -15,23 +15,22 @@ $(document).on('click', '#upload', function(){
     cache: false,
     processData: false,
     contentType: false,
-    xhrFields: {
-      onprogress: function(e) {
+    xhr: function()
+    {
+      var xhr = new window.XMLHttpRequest();
+      //Upload progress
+      xhr.upload.addEventListener("progress", function(e){
         if (e.lengthComputable) {
-          $('#p_bar').attr('style', 'width:0;height:2px;');
-
           var percent = (e.loaded / e.total) * 100;
-          $('#p_bar').attr('style', 'width:'+percent+'%');
+          $('#p_bar').attr('style', 'width:'+percent+'%;visibility:visible;');
+          console.log(percent);
         }
-        else {
-          $('#p_bar').attr('style', 'width:0;height:2px;');
-          $('#p_bar').attr('style', 'width:100%');
-        }
-      }
+      }, false);
+      return xhr;
     },
     success: function(data) {
       $('#contents').html(data);
-      $('#p_bar').attr('style', 'width:0;height:0;');
+      $('#p_bar').removeAttr('style');
     }
   });
 });
