@@ -28,12 +28,18 @@ if ( isset($_POST['pin_files']) ) {
       echo 'W' . $message . '<br/>';
     }
 
-    echo '<br/><br/><b>Lock file creation complete</b>';
+    $outcome = 'Lock file creation complete';
+    echo "<br/><br/><b>$outcome</b>";
   }
   else {
-    echo '<b>Lock file creation failed.<b><br/>';
+    $outcome = 'Lock file creation failed';
+    echo "<b>$outcome<b><br/>";
     echo $std_err;
   }
+
+  // Log Operator action
+  $description = "Create Lock Files: $files -- $outcome";
+  $OPERATOR->log('SYNC', $description);
 }
 else {
 ?>

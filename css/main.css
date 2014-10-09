@@ -7,6 +7,7 @@ html {
   margin: 0;
   padding: 0;
 
+  color: #333;
   background: gainsboro;
 }
 
@@ -17,6 +18,18 @@ body {
 
   margin: 0;
   padding: 0;
+
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 15px;
+  line-height: 1.42857143;
+  color: #333;
+  background-color: #fff;
+}
+
+:before, :after {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 div {
@@ -33,7 +46,7 @@ button {
 
   font-size: 0.99em;
   font-weight: bold;
-  color: black;
+  color: #333;
 
   cursor: pointer;
   background: none;
@@ -51,6 +64,26 @@ button:focus {
 textarea {
   width: 24em;
   height: 4em;
+}
+
+input {
+  line-height: 1.42857143;
+}
+
+div#p_bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  visibility: hidden;
+
+  width: 0;
+  height: 2px;
+  background: #333;
+
+  -webkit-transition: width 1s;
+  -moz-transition: width 1s;
+  -o-transition: width 1s;
+  transition: width 1s;
 }
 
 div.wrapper {
@@ -97,7 +130,7 @@ div.contents {
   width: 90%;
   min-height: 50px;
   max-height: 60%;
-  overflow-y: scroll;
+  overflow-y: auto;
 
   /*margin: 1em 0 0 2em;*/
   margin: 0 auto;
@@ -107,6 +140,12 @@ div.contents {
 
 div.contents > span {
   margin: 0.2em;
+}
+
+div.version {
+  position: absolute;
+  bottom: 4px;
+  right: 4px;
 }
 
 div.line_item1 {

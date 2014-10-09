@@ -1,30 +1,54 @@
 <?php
 // MAIN CONFIGURATION FILE
 
+// Current Version Number
+$CURR_VERSION = '1.1.0';
+
+
+/* Set the Default Timezone */
+date_default_timezone_set('America/New_York');
 
 /* List of IP addresses that are authorized to
  * use this software. This is instead of a login
  * system.
  */
 $AUTH_USERS = array(
-  '128.186.120.147',
-  '128.186.120.76'
+  '192.168.26.110',   // presentation machine (LOV016 Machine)
+  '128.186.120.147',  // cazell.cs.fsu.edu
+  '128.186.120.76',   // whissel.cs.fsu.edu
+  '128.186.120.51',   // Rezowanul Haque (munroe.cs.fsu.edu)
+  '128.186.120.229',  // deleon.cs.fsu.edu
+  '128.186.120.107',  // Todd Ryks (stephens.cs.fsu.edu)
+  '128.186.120.44'    // castelli.cs.fsu.edu
 );
 
+
+/* Active directory group name that users should be a
+ * part of in order to obtain access to this application.
+ */
 $AUTH_GROUP = 'CS-System';
+
+
+/* The absolute path to the directory containing
+ * the pin files here.
+ */
+$PIN_FILE_PATH = '/srv/http/lock-db/flatdb/';
 
 // Specify *.pins files here
 $PIN_FILES = array(
-  '/srv/http/lock-db/flatdb/faculty.pins',
-  '/srv/http/lock-db/flatdb/staff.pins',
-  '/srv/http/lock-db/flatdb/student.pins',
-  '/srv/http/lock-db/flatdb/guest.pins',
-  '/srv/http/lock-db/flatdb/university.pins',
-  '/srv/http/lock-db/flatdb/test.pins'
+  $PIN_FILE_PATH . 'faculty.pins',
+  $PIN_FILE_PATH . 'staff.pins',
+  $PIN_FILE_PATH . 'student.pins',
+  $PIN_FILE_PATH . 'guest.pins',
+  $PIN_FILE_PATH . 'university.pins'
 );
 
 // Specify the student roster file here.
-$STUD_RSTR_FILE = 'lock-db/flatdb/roster.txt';
+$STUD_RSTR_FILE = $PIN_FILE_PATH . 'roster.txt';
+
+
+/* Absolute path to Operator log file. */
+$OP_LOGFILE = '/srv/http/logs/operator.log';
 
 
 /* List of default groups. These groups represent the access

@@ -20,6 +20,10 @@ if ( isset($_POST) && !empty($_POST) ) {
     $DATA->flush_lock_roster($new_user->type);
 
     echo 'User: ' . $new_user->name . ' has been saved to the database.';
+
+    // Log Operator action
+    $description = "Create user: $new_user->name";
+    $OPERATOR->log('CREATE', $description);
   }
   elseif ($_POST['action'] === 'u') {
     $new_user = new User (
@@ -36,6 +40,25 @@ if ( isset($_POST) && !empty($_POST) ) {
     $DATA->flush_all_lock_roster($new_user->type);
 
     echo 'User: ' . $new_user->name . ' has been updated.';
+
+    // Log Operator action
+    $description = "Update user: $new_user->name";
+    $OPERATOR->log('UPDATE', $description);
+  }
+  elseif ($_POST['action'] === 'd') {
+
+    $old_user = $DATA->lock_roster[ $_POST['index'] ];
+
+    unset( $DATA->lock_roster[ $_POST['index'] ] );
+
+    // update all pin files just in case the user chaged type.
+    $DATA->flush_all_lock_roster($old_user->type);
+
+    echo 'User: ' . $old_user->name . ' has been deleted.';
+
+    // Log Operator action
+    $description = "Delete user: $old_user->name";
+    $OPERATOR->log('DELETE', $description);
   }
 }
 else {
@@ -92,6 +115,7 @@ else {
     <select id="type">
       <?php
       foreach ($DATA->types as $fname => $type) {
+echo $fname . '=' . $user->type . '<br>';
         if ( isset($user) && $fname === $user->type) {
       ?>
       <option selected value="<?php echo $fname;?>"><?php echo $type;?></option>

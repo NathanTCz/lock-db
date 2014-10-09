@@ -1,4 +1,5 @@
 <?php
+chdir('../');
 require_once 'core/config.php';
 session_start();
 
@@ -23,17 +24,11 @@ if ($logout == "yes") { //destroy the session
 	session_destroy();
 }
 
-//force the browser to use ssl (STRONGLY RECOMMENDED!!!!!!!!)
-/*if ($_SERVER["SERVER_PORT"] != 443){ 
-    header("Location: https://" . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF']); 
-    exit(); 
-}*/
-
 $username = strtoupper($_POST["username"]); //remove case sensitivity on the username
 $password = $_POST["password"];
 $formage = $_POST["formage"];
 
-if ($_POST["oldform"]) { //prevent null bind
+if ($_POST["oldform"]) { //prevent LDAP null bind
 
 	if ($username != NULL && $password != NULL){
 		//include the class and create a connection
@@ -51,8 +46,9 @@ if ($_POST["oldform"]) { //prevent null bind
 			//establish your session and redirect
 			session_start();
 			$_SESSION["username"] = $username;
-            $_SESSION["userinfo"] = $adldap->user()->info($username);
-            $_SESSION["user_groups"] = $adldap->user()->groups($username);
+      $_SESSION["user_info"] = $adldap->user()->info($username);
+      $_SESSION["user_groups"] = $adldap->user()->groups($username);
+
 			$redir = "Location: /";
 			header($redir);
 			exit;
@@ -63,7 +59,6 @@ if ($_POST["oldform"]) { //prevent null bind
 
 ?>
 
-<html>
 <head>
 <style>
 body {
@@ -73,7 +68,7 @@ body {
 }
 div {
   display: block;
-  width: 20%;
+  width: 30%;
   margin: 10em auto;
 }
 </style>
@@ -99,6 +94,3 @@ Password: <input type='password' name='password'><br>
 </div>
 
 </body>
-
-</html>
-
