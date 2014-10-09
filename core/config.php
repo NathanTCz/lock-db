@@ -13,7 +13,7 @@ date_default_timezone_set('America/New_York');
  * system.
  */
 $AUTH_USERS = array(
-  '192.168.26.110',   // presentation machine
+  '192.168.26.110',   // presentation machine (LOV016 Machine)
   '128.186.120.147',  // cazell.cs.fsu.edu
   '128.186.120.76',   // whissel.cs.fsu.edu
   '128.186.120.51',   // Rezowanul Haque (munroe.cs.fsu.edu)
