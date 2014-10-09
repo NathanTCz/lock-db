@@ -13,8 +13,13 @@ date_default_timezone_set('America/New_York');
  * system.
  */
 $AUTH_USERS = array(
-  '128.186.120.147',
-  '128.186.120.76'
+  '192.168.26.110',   // presentation machine
+  '128.186.120.147',  // cazell.cs.fsu.edu
+  '128.186.120.76',   // whissel.cs.fsu.edu
+  '128.186.120.51',   // Rezowanul Haque (munroe.cs.fsu.edu)
+  '128.186.120.229',  // deleon.cs.fsu.edu
+  '128.186.120.107',  // Todd Ryks (stephens.cs.fsu.edu)
+  '128.186.120.44'    // castelli.cs.fsu.edu
 );
 
 
