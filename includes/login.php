@@ -1,17 +1,15 @@
 <?php
-chdir('../');
-require_once 'core/config.php';
 session_start();
 
 if ( !in_array($_SERVER['REMOTE_ADDR'], $AUTH_USERS) ) {
   session_destroy();
-  include 'includes/no_access.php';
+  include __DIR__ . '/../includes/no_access.php';
   exit;
 }
 
 if ( isset($_SESSION['user_groups']) && !in_array($AUTH_GROUP, $_SESSION['user_groups']) ) {
   session_destroy();
-  include 'includes/no_access.php';
+  include __DIR__ . '/../includes/no_access.php';
   exit;
 }
 
@@ -32,7 +30,7 @@ if ($_POST["oldform"]) { //prevent LDAP null bind
 
 	if ($username != NULL && $password != NULL){
 		//include the class and create a connection
-		include "adLDAP/src/adLDAP.php";
+		include __DIR__ . '/../adLDAP/src/adLDAP.php';
         try {
 		    $adldap = new adLDAP();
         }
