@@ -1,15 +1,17 @@
 <?php
 session_start();
 
+require_once __DIR__ . '/../core/config.php';
+
 if ( !in_array($_SERVER['REMOTE_ADDR'], $AUTH_USERS) ) {
   session_destroy();
-  include __DIR__ . '/../includes/no_access.php';
+  include __DIR__ . '/no_access.php';
   exit;
 }
 
 if ( isset($_SESSION['user_groups']) && !in_array($AUTH_GROUP, $_SESSION['user_groups']) ) {
   session_destroy();
-  include __DIR__ . '/../includes/no_access.php';
+  include __DIR__ . '/no_access.php';
   exit;
 }
 
