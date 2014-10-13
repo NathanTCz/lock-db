@@ -2,7 +2,7 @@
 // MAIN CONFIGURATION FILE
 
 // Current Version Number
-$CURR_VERSION = '1.1.2';
+$CURR_VERSION = '1.1.3';
 
 
 /* Set the Default Timezone */
@@ -32,7 +32,7 @@ $AUTH_GROUP = 'CS-System';
 /* The absolute path to the directory containing
  * the pin files here.
  */
-$PIN_FILE_PATH = '/srv/http/lock-db/flatdb/';
+$PIN_FILE_PATH = '/usr/share/webapps/lock-db/flatdb/';
 
 // Specify *.pins files here
 $PIN_FILES = array(
@@ -48,7 +48,7 @@ $STUD_RSTR_FILE = $PIN_FILE_PATH . 'roster.txt';
 
 
 /* Absolute path to Operator log file. */
-$OP_LOGFILE = '/srv/http/logs/operator.log';
+$OP_LOGFILE = '/var/www/localhost/htdocs/logs/operator.log';
 
 
 /* List of default groups. These groups represent the access

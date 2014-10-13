@@ -18,7 +18,7 @@ $DATA->parse_pin_files();
 
 if ( isset($_POST['pin_files']) ) {
   $files = implode( ' ', $_POST['pin_files'] );
-  chdir('lock-db/flatdb/');
+  chdir($PIN_FILE_PATH);
   $return = shell_exec_wstderr("/usr/bin/perl create-doors.pl $files", $std_out, $std_err);
 
   if ( $return == 0 ) {
