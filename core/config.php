@@ -2,7 +2,7 @@
 // MAIN CONFIGURATION FILE
 
 // Current Version Number
-$CURR_VERSION = '1.1.3';
+$CURR_VERSION = '1.2.0';
 
 
 /* Set the Default Timezone */
@@ -48,7 +48,7 @@ $STUD_RSTR_FILE = $PIN_FILE_PATH . 'roster.txt';
 
 
 /* Absolute path to Operator log file. */
-$OP_LOGFILE = '/var/www/localhost/htdocs/logs/operator.log';
+$OP_LOGFILE = '/var/log/lockdb.log';
 
 
 /* List of default groups. These groups represent the access
@@ -77,6 +77,7 @@ $GROUPS = array(
 
 /* List of default doors. These are the individual access points.*/
 $DOORS = array(
+  'lov010',
   'lov010a',
   //'lov016',
   'lov025',
