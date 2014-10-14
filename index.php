@@ -22,7 +22,7 @@ require_once 'core/init.php';
     <div id="p_bar"></div>
 
     <div class="wrapper">
-      <span id="title">Lock Utility</span>
+      <span id="title">warLock</span>
 
       <div class="tools">
         <div class="formbox">
@@ -33,7 +33,7 @@ require_once 'core/init.php';
         </div>
 
         <button id="logout">Logout</button>
-        <button id="cr_doors">Create Lock Files</button>
+        <button id="sync">Create Lock Files</button>
         <button id="up_csv">Import File</button>
       </div>
 

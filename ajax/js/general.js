@@ -29,7 +29,11 @@ $(document).on('click', '#up_csv', function(){
   });
 });
 
-/* Create Lock Files Button */
+/* Create Lock Files Button
+
+ * This use of the button is deprecated as of v1.1.3
+ * see comments in ajax/php/create_doors.php
+
 $(document).on('click', '#cr_doors', function(){
   $.ajax({
     url: 'ajax/php/create_doors.php',
@@ -37,7 +41,25 @@ $(document).on('click', '#cr_doors', function(){
       $('#contents').html(data);
     }
   });
+});*/
+
+/* Create Lock Files Button */
+$(document).on('click', '#sync', function(){
+  var sendData = {
+    go: 'go',
+  };
+
+  $.ajax({
+    url: 'ajax/php/create_doors.php',
+    type: 'POST',
+    data: sendData,
+    success: function(data) {
+      $('#contents').html(data);
+    }
+  });
 });
+
+
 
 /* Logout button */
 $(document).on('click', '#logout', function(){

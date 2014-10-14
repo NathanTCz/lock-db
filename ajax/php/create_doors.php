@@ -16,8 +16,8 @@ require_once 'core/init.php';
 
 $DATA->parse_pin_files();
 
-if ( isset($_POST['pin_files']) ) {
-  $files = implode( ' ', $_POST['pin_files'] );
+if ( isset($_POST['go']) ) {
+  $files = implode( ' ', $PIN_FILES );
   chdir($PIN_FILE_PATH);
   $return = shell_exec_wstderr("/usr/bin/perl create-doors.pl $files", $std_out, $std_err);
 
@@ -41,7 +41,16 @@ if ( isset($_POST['pin_files']) ) {
   $description = "Create Lock Files: $files -- $outcome";
   $OPERATOR->log('SYNC', $description);
 }
-else {
+
+
+
+/*
+ * This part of the form is deprecated as of v1.1.3
+ * The option to select which files to be created is no longer
+ * needed and may in some cases, be a dangerous action.
+*/
+
+/*else {
 ?>
 
 <span>Choose which pin files to sync:</span>
@@ -61,5 +70,5 @@ else {
 <input id="check_all" type="checkbox">Check All<br/><br/>
 <button id="sync">Create Lock Files</span>
 <?php
-}
+}*/
 ?>
