@@ -150,11 +150,6 @@ div.version {
 
 div.line_item1 {
   cursor: pointer;
-
-  border: 1px solid #EEE;
-  border-top: none;
-  border-left: none;
-  border-right: none;
 }
 
 div.line_item1:nth-child(3n+1) {
