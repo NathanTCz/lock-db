@@ -1,9 +1,9 @@
-/* Upload File Button */
-$(document).on('click', '#check_all', function(){
-  $('input.checks').prop('checked', this.checked);
-});
+/* Create lock files
 
-/* Create lock files */
+ * This button is deprecate as of v1.1.3
+ * see comments in ajax/php/create_doors.php
+ * This function has been moved to ajax/js/general.js
+
 $(document).on('click', '#sync', function(){
   var formData = new FormData( $('#pin_files_form')[0] );
 
@@ -19,3 +19,10 @@ $(document).on('click', '#sync', function(){
     }
   });
 });
+*/
+
+/* Check all
+$(document).on('click', '#check_all', function(){
+  $('input.checks').prop('checked', this.checked);
+});
+*/
