@@ -15,6 +15,7 @@ $(document).on('click', '#cr_user', function(){
     data: sendData,
     success: function(data) {
       $('#contents').html(data);
+      ajax_callstack.push(this);
     }
   });
 });
@@ -58,6 +59,7 @@ $(document).on('click', '#ed_user', function(){
     data: sendData,
     success: function(data) {
       $('#contents').html(data);
+      ajax_callstack.push(this);
     }
   });
 });
