@@ -4,7 +4,7 @@ require_once 'core/init.php';
 
 $DATA->parse_pin_files();
 $results = $DATA->search_lock_roster( $_GET['q'] );
-//$results = $DATA->fuzzy_search_lockdb( $_GET['q'] );
+
 if ( !empty($results) ) {
   echo '<span>' . count($results) . ' results</span><br/><br/>';
 
