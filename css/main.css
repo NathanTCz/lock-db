@@ -86,13 +86,35 @@ div#p_bar {
   transition: width 1s;
 }
 
+div#back {
+  position: absolute;
+  top: 0em;
+  left: 0;
+
+  height: 2em;
+  width: 8em;
+
+  background: gray;
+  cursor: pointer;
+}
+
+div#back:after {
+  position: relative;
+  top: -0.4em;
+  left: 0.85em;
+
+  content: '\2190';
+  font-size: 3em;
+  color: #fff;
+}
+
 div.wrapper {
   width: 75%;
   height: 100%;
 
   margin: 2em auto;
 
-  background: white;
+  background: #fff;
 }
 
 span#title {
@@ -240,7 +262,7 @@ div.search_list {
 
   margin: 0 0 0 10em;
 
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 div.upload {

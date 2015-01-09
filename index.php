@@ -20,6 +20,7 @@ require_once 'core/init.php';
 
   <body>
     <div id="p_bar"></div>
+    <div id="back"></div>
 
     <div class="wrapper">
       <span id="title">warLock</span>

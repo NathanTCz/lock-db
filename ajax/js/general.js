@@ -15,6 +15,8 @@ $(document).on('keyup', '#name_box', function(){
     url: 'ajax/php/search.php?q='+q,
     success: function(data) {
       $('#contents').html(data);
+      $('#name_box').val(q);
+      ajax_callstack.push(this);
     }
   });
 });
@@ -25,6 +27,7 @@ $(document).on('click', '#up_csv', function(){
     url: 'ajax/php/upload.php',
     success: function(data) {
       $('#contents').html(data);
+      ajax_callstack.push(this);
     }
   });
 });
@@ -55,6 +58,7 @@ $(document).on('click', '#sync', function(){
     data: sendData,
     success: function(data) {
       $('#contents').html(data);
+      ajax_callstack.push(this);
     }
   });
 });
@@ -86,3 +90,16 @@ $(document).on('keyup', '#points', function(){
     }
   });
 });
+
+
+/* Back button */
+$(document).on('click', '#back', function(){
+  if (ajax_callstack.length > 1) {
+    ajax_callstack.pop();
+    $.ajax( ajax_callstack.pop() );
+  }
+});
+
+
+// this is for the back button
+var ajax_callstack = [];
