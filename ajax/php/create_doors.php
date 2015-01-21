@@ -37,6 +37,8 @@ if ( isset($_POST['go']) ) {
     echo $std_err;
   }
 
+  shell_exec_wstderr("cp -a doors/* $PDA_PATH", $std_out, $std_err);
+
   // Log Operator action
   $description = "Create Lock Files: $files -- $outcome";
   $OPERATOR->log('SYNC', $description);
