@@ -12,7 +12,7 @@ class Init {
 
   function __construct ($r, $pf) {
     $this->studroster_filename = $r;
-    $this->pin_files = $pf; 
+    $this->pin_files = $pf;
   }
 
   function parse_students () {
@@ -38,6 +38,19 @@ class Init {
           echo "Error: unexpected fgets() fail\n";
       }
       fclose($handle);
+    }
+  }
+
+  function parse_conf($conf_file) {
+    $handle = fopen($conf_file, 'r');
+    $values = array();
+
+    if ($handle) {
+      while ( ($buffer = fgets($handle, 1024)) !== false ) {
+        if ($buffer[0] === '#') continue;
+
+        $values[] = $buffer;
+      }
     }
   }
 
@@ -77,7 +90,18 @@ class Init {
             $fname
           );
 
-          $index = preg_replace('/\s/', '', $new_user->last_name . $new_user->first_name . $new_user->cardnum);
+          /* The folowing is the index of the user in the whole roster. This
+           * is what is used to find the person when using the search
+           * function. So anything appended to the key here will be searchable
+           * by prepending an * to the search term.
+           */
+          $index = preg_replace('/\s/', '',
+            $new_user->last_name .
+            $new_user->first_name .
+            $new_user->cardnum .
+            $new_user->groups .
+            $new_user->type
+          );
           $this->lock_roster[$index] = $new_user;
         }
         if (!feof($handle)) {
@@ -97,7 +121,7 @@ class Init {
      *
      * values delmited by commas ','
     */
-    
+
     global $PIN_FILE_PATH;
     global $OPERATOR;
 
@@ -207,9 +231,9 @@ class Init {
     if ( strlen($search) > 0 ) {
 
       $shortest = -1;
-  
+
       foreach( $this->lock_roster as $key => $user ) {
-        
+
         // calculate the distance between the input word,
         // and the current word
         $lev = levenshtein( strtolower($search), strtolower($user->last_name) );
@@ -260,9 +284,9 @@ class Init {
     if ( strlen($search) > 0 ) {
 
       $shortest = -1;
-  
+
       foreach( $this->student_roster as $key => $user ) {
-        
+
         // calculate the distance between the input word,
         // and the current word
         $lev = levenshtein( strtolower($search), strtolower($user->last_name) );

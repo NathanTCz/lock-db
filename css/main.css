@@ -103,7 +103,7 @@ div#back:after {
   top: -0.4em;
   left: 0.85em;
 
-  content: '\2190';
+  content: '<';
   font-size: 3em;
   color: #fff;
 }

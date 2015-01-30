@@ -26,7 +26,6 @@ if ($logout == "yes") { //destroy the session
 
 $username = strtoupper($_POST["username"]); //remove case sensitivity on the username
 $password = $_POST["password"];
-$formage = $_POST["formage"];
 
 if ($_POST["oldform"]) { //prevent LDAP null bind
 
@@ -37,10 +36,10 @@ if ($_POST["oldform"]) { //prevent LDAP null bind
 		    $adldap = new adLDAP();
         }
         catch (adLDAPException $e) {
-            echo $e; 
-            exit();   
+            echo $e;
+            exit();
         }
-		
+
 		//authenticate the user
 		if ($adldap->authenticate($username, $password)){
 			//establish your session and redirect
