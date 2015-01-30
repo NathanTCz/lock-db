@@ -34,6 +34,12 @@ $AUTH_GROUP = 'CS-System';
  */
 $PIN_FILE_PATH = '/usr/share/webapps/lock-db/flatdb/';
 
+/* The absolute path to the PDA sync directory. This
+ * is where the door files will be copied to after
+ * generation.
+*/
+$PDA_PATH = '/home/sysgroup/PDAFiles/locks/';
+
 // Specify *.pins files here
 $PIN_FILES = array(
   $PIN_FILE_PATH . 'faculty.pins',
