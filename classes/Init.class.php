@@ -90,7 +90,18 @@ class Init {
             $fname
           );
 
-          $index = preg_replace('/\s/', '', $new_user->last_name . $new_user->first_name . $new_user->cardnum);
+          /* The folowing is the index of the user in the whole roster. This
+           * is what is used to find the person when using the search
+           * function. So anything appended to the key here will be searchable
+           * by prepending an * to the search term.
+           */
+          $index = preg_replace('/\s/', '',
+            $new_user->last_name .
+            $new_user->first_name .
+            $new_user->cardnum .
+            $new_user->groups .
+            $new_user->type
+          );
           $this->lock_roster[$index] = $new_user;
         }
         if (!feof($handle)) {
