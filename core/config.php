@@ -38,7 +38,10 @@ $PIN_FILE_PATH = '/usr/share/webapps/lock-db/flatdb/';
  * is where the door files will be copied to after
  * generation.
 */
-$PDA_PATH = '/home/sysgroup/PDAFiles/locks/';
+$PDA_PATH = '/home/ncaz/PDAFiles/locks/';
+
+/* The user that owns the PDAFiles directory*/
+$PDA_USER = 'ncaz';
 
 // Specify *.pins files here
 $PIN_FILES = array(
