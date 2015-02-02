@@ -2,7 +2,7 @@
 // MAIN CONFIGURATION FILE
 
 // Current Version Number
-$CURR_VERSION = '1.2.0';
+$CURR_VERSION = '2.0.0';
 
 
 /* Set the Default Timezone */
