@@ -13,7 +13,6 @@ date_default_timezone_set('America/New_York');
  * system.
  */
 $AUTH_USERS = array(
-  '127.0.0.1',
   '128.186.120.147',  // cazell.cs.fsu.edu
   '128.186.120.76',   // whissel.cs.fsu.edu
   '128.186.120.51',   // Rezowanul Haque (munroe.cs.fsu.edu)
@@ -23,26 +22,24 @@ $AUTH_USERS = array(
   '128.186.120.132'    // delapena.cs.fsu.edu
 );
 
-
 /* Active directory group name that users should be a
  * part of in order to obtain access to this application.
  */
 $AUTH_GROUP = 'CS-System';
-
 
 /* The absolute path to the directory containing
  * the pin files here.
  */
 $PIN_FILE_PATH = '/usr/share/webapps/lock-db/flatdb/';
 
-/* The absolute path to the PDA sync directory. This
- * is where the door files will be copied to after
- * generation.
-*/
-$PDA_PATH = '/home/ncaz/PDAFiles/locks/';
-
 /* The user that owns the PDAFiles directory*/
-$PDA_USER = 'ncaz';
+$PDA_USER = 'sysgroup';
+
+/* The absolute path to the PDA sync directory. This
+* is where the door files will be copied to after
+* generation.
+*/
+$PDA_PATH = "/home/$PDA_USER/PDAFiles/locks/";
 
 // Specify *.pins files here
 $PIN_FILES = array(
@@ -55,7 +52,6 @@ $PIN_FILES = array(
 
 // Specify the student roster file here.
 $STUD_RSTR_FILE = $PIN_FILE_PATH . 'roster.txt';
-
 
 /* Absolute path to Operator log file. */
 $OP_LOGFILE = '/var/log/lockdb.log';
