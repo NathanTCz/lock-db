@@ -49,9 +49,11 @@ class Init {
       while ( ($buffer = fgets($handle, 1024)) !== false ) {
         if ($buffer[0] === '#') continue;
 
-        $values[] = $buffer;
+        $values[] = explode(':', trim($buffer))[0];
       }
     }
+    fclose($handle);
+    return $values;
   }
 
   function parse_pin_files () {
