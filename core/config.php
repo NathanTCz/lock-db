@@ -19,7 +19,8 @@ $AUTH_USERS = array(
   '128.186.120.51',   // Rezowanul Haque (munroe.cs.fsu.edu)
   '128.186.120.229',  // deleon.cs.fsu.edu
   '128.186.120.107',  // Todd Ryks (stephens.cs.fsu.edu)
-  '128.186.120.44'    // castelli.cs.fsu.edu
+  '128.186.120.44',    // castelli.cs.fsu.edu
+  '128.186.120.132'    // delapena.cs.fsu.edu
 );
 
 

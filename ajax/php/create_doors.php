@@ -37,6 +37,13 @@ if ( isset($_POST['go']) ) {
     echo $std_err;
   }
 
+  /* Use git to commit previous audit files to keep
+   * a date on the audit trails
+   */
+  $date = date(DATE_RFC2822);
+  shell_exec("cd $PDA_PATH && sudo -u $PDA_USER git commit -am '$date'");
+
+  // copy the new door files to the sync directory
   $return = shell_exec_wstderr("sudo -u $PDA_USER cp doors/* $PDA_PATH", $std_out, $std_err);
 
   if ( $return == 0 ) {
