@@ -42,6 +42,9 @@ $OPERATOR = new Operator (
   $_SERVER['REMOTE_ADDR']
 );
 
+$DOORS = array();
+$GROUPS = array();
+
 $DOORS = $DATA->parse_conf($ACCESS_POINTS_FILE);
 $GROUPS = $DATA->parse_conf($ACCESS_GROUPS_FILE);
 ?>
