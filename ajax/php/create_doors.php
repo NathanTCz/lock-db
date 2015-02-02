@@ -38,7 +38,9 @@ if ( isset($_POST['go']) ) {
   }
 
   /* Use git to commit previous audit files to keep
-   * a date on the audit trails
+   * a date on the audit trails. must be able to execute
+   * as different user. This requires a line to be added
+   * to the /etc/sudoers file.
    */
   $date = date(DATE_RFC2822);
   shell_exec("cd $PDA_PATH && sudo -u $PDA_USER git commit -am '$date'");
