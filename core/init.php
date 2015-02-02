@@ -1,6 +1,6 @@
 <?php
-ini_set('display_errors',1);
-error_reporting(E_ALL);
+// ini_set('display_errors',1);
+// error_reporting(E_ALL);
 
 session_start();
 
@@ -41,9 +41,6 @@ $OPERATOR = new Operator (
   $_SESSION['user_groups'],
   $_SERVER['REMOTE_ADDR']
 );
-
-$DOORS = array();
-$GROUPS = array();
 
 $DOORS = $DATA->parse_conf($ACCESS_POINTS_FILE);
 $GROUPS = $DATA->parse_conf($ACCESS_GROUPS_FILE);
