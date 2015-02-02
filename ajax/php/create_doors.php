@@ -37,7 +37,32 @@ if ( isset($_POST['go']) ) {
     echo $std_err;
   }
 
-  shell_exec_wstderr("cp -a doors/* $PDA_PATH", $std_out, $std_err);
+  /* Use git to commit previous audit files to keep
+   * a date on the audit trails. must be able to execute
+   * as different user. This requires a line to be added
+   * to the /etc/sudoers file.
+   */
+  $date = date(DATE_RFC2822);
+  shell_exec("cd $PDA_PATH && sudo -u $PDA_USER git commit -am '$date'");
+
+  // copy the new door files to the sync directory
+  $return = shell_exec_wstderr("sudo -u $PDA_USER cp doors/* $PDA_PATH", $std_out, $std_err);
+
+  if ( $return == 0 ) {
+    $std_out = explode('W', $std_out);
+    unset($std_out[0]);
+    foreach ($std_out as $message) {
+      echo 'W' . $message . '<br/>';
+    }
+
+    $outcome = 'Lock files successfully copied to sync directory';
+    echo "<br/><br/><b>$outcome</b>";
+  }
+  else {
+    $outcome = 'Lock file copy failed';
+    echo "<b>$outcome<b><br/>";
+    echo $std_err;
+  }
 
   // Log Operator action
   $description = "Create Lock Files: $files -- $outcome";

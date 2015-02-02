@@ -1,15 +1,15 @@
 <?php
-/*ini_set('display_errors',1);
-error_reporting(E_ALL);*/
+// ini_set('display_errors',1);
+// error_reporting(E_ALL);
 
 session_start();
 
 require_once 'core/config.php';
 
 //force the browser to use ssl (STRONGLY RECOMMENDED!!!!!!!!)
-if ($_SERVER["SERVER_PORT"] != 443){ 
-    header("Location: https://" . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF']); 
-    exit(); 
+if ($_SERVER["SERVER_PORT"] != 443){
+    header("Location: https://" . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF']);
+    exit();
 }
 
 if ( in_array($_SERVER['REMOTE_ADDR'], $AUTH_USERS) ) {
@@ -41,4 +41,7 @@ $OPERATOR = new Operator (
   $_SESSION['user_groups'],
   $_SERVER['REMOTE_ADDR']
 );
+
+$DOORS = $DATA->parse_conf($ACCESS_POINTS_FILE);
+$GROUPS = $DATA->parse_conf($ACCESS_GROUPS_FILE);
 ?>

@@ -41,8 +41,13 @@ require_once 'core/init.php';
 
 
       <div id="contents" class="contents"></div>
-      <div class="version">
-        <?php echo 'rev ' . $CURR_VERSION;?>
+      <div class="footer">
+        <span class="copyright">
+          &#169 Systems Group, Carothers (MCH) 208, Florida State University , Tallahassee, FL 32306 | 850/644-4019
+        </span>
+        <span class="version">
+          <?php echo 'rev ' . $CURR_VERSION;?><span>
+        </span>
       </div>
     </div>
   </body>
